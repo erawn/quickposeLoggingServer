@@ -1,12 +1,10 @@
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
 import helmet from "helmet";
 import https from "https";
 import fs from "fs";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { v4 as uuidv4 } from "uuid";
-dotenv.config();
 import { createClient } from "redis";
 
 const client = createClient();
@@ -31,7 +29,7 @@ var corsOptions = {
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 app.use(cors(corsOptions));
-const port = process.env.PORT;
+const port = 4000;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 

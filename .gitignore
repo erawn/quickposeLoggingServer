@@ -2,17 +2,11 @@
 
 # dependencies
 /node_modules
-/express/node_modules
-/next/node_modules
 /.pnp
 .pnp.js
 
 # testing
 /coverage
-
-# next.js
-*/.next/
-*/out/
 
 # production
 */build
@@ -39,3 +33,4 @@ yarn-error.log*
 next-env.d.ts
 *.crt
 *.key
+dist/*

@@ -4,7 +4,7 @@ import helmet from "helmet";
 import https from "https";
 import fs from "fs";
 import cors from "cors";
-import bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 import { createClient } from "redis";

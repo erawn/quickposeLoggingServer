@@ -66,21 +66,20 @@ app.post("/analytics", async (req: RequestWithClient, res: Response) => {
   //   return res.status(200);
   // }
 });
-app.listen(4000, async function () {
-  //console.log("Example app listening on port 4000.");
-  await client.connect();
-});
-// https
-//   .createServer(
-//     {
-//       requestCert: false,
-//       rejectUnauthorized: false,
-//       ca: fs.readFileSync("root.crt"),
-//       key: fs.readFileSync("server.key"),
-//       cert: fs.readFileSync("server.crt"),
-//     },
-//     app
-//   )
-//   .listen(port, () => {
-//     console.log("server is runing at port", port);
-//   });
+// app.listen(4000, async function () {
+//   //console.log("Example app listening on port 4000.");
+//   await client.connect();
+// });
+https
+  .createServer(
+    {
+      requestCert: true,
+      rejectUnauthorized: true,
+      cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
+    },
+    app
+  )
+  .listen(port, async () => {
+    await client.connect();
+    console.log("server is runing at port", port);
+  });

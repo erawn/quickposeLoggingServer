@@ -29,7 +29,7 @@ var corsOptions = {
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 app.use(cors(corsOptions));
-const port = 4000;
+//const port = 4000;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 
@@ -77,7 +77,7 @@ https
     },
     app
   )
-  .listen(port, async () => {
+  .listen(async () => {
     await client.connect();
-    console.log("server is runing at port", port);
+    //console.log("server is runing at port", port);
   });

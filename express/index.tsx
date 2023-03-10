@@ -4,14 +4,12 @@ import helmet from "helmet";
 import https from "https";
 import fs from "fs";
 import cors from "cors";
-import * as level from "level";
 import bodyParser = require("body-parser");
 import { v4 as uuidv4 } from "uuid";
 dotenv.config();
+import { createClient } from "redis";
 
-//https://github.com/Level/level
-//https://github.com/Level/classic-level/issues/50
-const db = new level.Level("./db", { valueEncoding: "json" });
+const client = createClient();
 
 const app: Express = express();
 app.use(helmet());
@@ -50,14 +48,12 @@ app.get("/", (req: RequestWithClient, res: Response) => {
   }
 });
 
-app.post("/analytics", (req: RequestWithClient, res: Response) => {
+app.post("/analytics", async (req: RequestWithClient, res: Response) => {
   //console.log(req.client.authorized);
 
   const data = req.body;
-
   if (data.projectID != "") {
-    console.log("request", data.projectID);
-    db.put(uuidv4(), data);
+    client.set(new Date().getTime().toString(), JSON.stringify(data));
   }
 
   return res.status(200);
@@ -70,8 +66,9 @@ app.post("/analytics", (req: RequestWithClient, res: Response) => {
   //   return res.status(200);
   // }
 });
-app.listen(4000, function () {
-  console.log("Example app listening on port 4000.");
+app.listen(4000, async function () {
+  //console.log("Example app listening on port 4000.");
+  await client.connect();
 });
 // https
 //   .createServer(

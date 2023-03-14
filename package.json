@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "node dist/index.jsx",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.jsx\"",
-    "server": "pm2 start dist/index.jsx "
+    "server": "pm2 start -f dist/index.jsx "
   },
   "dependencies": {
     "@types/cors": "^2.8.12",

@@ -1,5 +1,7 @@
 #! /bin/bash
 
+
+# gcloud compute firewall-rules create allow-https --description "https server" --allow tcp:443 --format json
 git config --global user.email "erawn65@gmail.com"
 git config --global user.name "Eric Rawn"
 
@@ -17,6 +19,12 @@ npm install --global yarn
 yarn
 
 sudo apt install lsb-release
+
+sudo apt-get install -y nginx
+
+sudo cp default /etc/nginx/sites-available/default
+
+sudo service nginx restart
 
 yes | curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 

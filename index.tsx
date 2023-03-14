@@ -15,9 +15,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var corsOptions = {
   origin: "*",
-  credentials: true,
-  method: "GET,POST,OPTIONS",
-  allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
@@ -32,7 +29,7 @@ var corsOptions = {
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 app.use(cors(corsOptions));
-//const port = 4000;
+const port = 2053;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 
@@ -74,13 +71,12 @@ app.post("/analytics", async (req: RequestWithClient, res: Response) => {
 https
   .createServer(
     {
-      requestCert: true,
-      rejectUnauthorized: true,
       cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
+	key: fs.readFileSync("/home/erawn65/analyticsKey.pem")
     },
     app
   )
-  .listen(async () => {
+  .listen(port, async () => {
     await client.connect();
-    //console.log("server is runing at port", port);
+    console.log("server is runing at port", port);
   });

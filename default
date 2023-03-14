@@ -1,12 +1,18 @@
 server {
-  listen 80;
-  server_name 35.225.91.146;
-
-  location / {
-    proxy_pass "http://127.0.0.1:8080";
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_cache_bypass $http_upgrade;
-  }
-}
+    listen 80;
+    listen 443 ssl;
+    
+    server_name 35.225.91.146;
+    
+    ssl_certificate     /home/erawn65/analyticsCert.pem;
+    ssl_certificate_key /home/erawn65/analyticsKey.pem;
+    
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+       }
+    }

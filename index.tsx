@@ -28,8 +28,8 @@ var corsOptions = {
 //   method: ["POST"],
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
-app.use(cors(corsOptions));
-const port = 2053;
+app.use(cors());
+const port = 443;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 
@@ -40,9 +40,10 @@ interface RequestWithClient extends Request {
 app.get("/", (req: RequestWithClient, res: Response) => {
   //console.log(req.client.authorized);
   if (!req.client.authorized) {
+    return res.send("Hello, world! UNAUTHORIZED");
     return res.status(401).send("Invalid client certificate authentication.");
   } else {
-    return res.send("Hello, world!");
+    return res.send("Hello, world! AUTHORIZED");
   }
 });
 
@@ -64,15 +65,15 @@ app.post("/analytics", async (req: RequestWithClient, res: Response) => {
   //   return res.status(200);
   // }
 });
-// app.listen(4000, async function () {
-//   //console.log("Example app listening on port 4000.");
-//   await client.connect();
-// });
+app.listen(80, async function () {
+  console.log("Example app listening on port 80");
+  await client.connect();
+});
 https
   .createServer(
     {
       cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
-	key: fs.readFileSync("/home/erawn65/analyticsKey.pem")
+      key: fs.readFileSync("/home/erawn65/analyticsKey.pem"),
     },
     app
   )

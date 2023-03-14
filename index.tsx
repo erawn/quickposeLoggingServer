@@ -15,7 +15,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var corsOptions = {
   origin: "*",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
+  method: "GET,POST,OPTIONS",
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 // var corsOptions = {

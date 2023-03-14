@@ -18,13 +18,13 @@ yarn
 
 sudo apt install lsb-release
 
-curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+yes | curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 
-<e /etc/apt/sources.list.d/redis.list
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 
 sudo apt-get update
 
-sudo apt-get install redis
+yes | sudo apt-get install redis
 
 sudo mkdir /etc/redis
 sudo mkdir /var/redis
@@ -43,7 +43,7 @@ sudo cp /bin/redis-cli /usr/local/bin/redis-cli
 
 sudo /etc/init.d/redis_6379 start
 
-sudo yarn global add pm2
+yarn global add pm2
 
 yarn build
 

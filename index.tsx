@@ -29,6 +29,7 @@ var corsOptions = {
 // };
 app.use(cors());
 const port = 2083;
+const httpPort = process.env.PORT || 5000;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 
@@ -65,10 +66,20 @@ app.post("/analytics", (req: RequestWithClient, res: Response) => {
   //   return res.status(200);
   // }
 });
-app.listen(8080, async function () {
-  console.log("Example app listening on port 80");
-  //await client.connect();
-});
+app
+  .listen(httpPort, async function () {
+    console.log("Example app listening on port", httpPort);
+    //await client.connect();
+  })
+  .on("error", function (err) {
+    process.once("SIGUSR2", function () {
+      process.kill(process.pid, "SIGUSR2");
+    });
+    process.on("SIGINT", function () {
+      // this is only called on ctrl+c, not restart
+      process.kill(process.pid, "SIGINT");
+    });
+  });
 https
   .createServer(
     {

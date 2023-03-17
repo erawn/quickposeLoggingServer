@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.jsx",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.jsx\"",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.jsx --signal SIGTERM\"",
     "server": "pm2 start -f dist/index.jsx "
   },
   "dependencies": {

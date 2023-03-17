@@ -1,16 +1,14 @@
 server {
-
-    listen 443 ssl;
+    listen [::]:80;
+    listen [::]:443 ssl;
     
     server_name analytics.ericrawn.media;
     
     ssl_certificate     /home/erawn65/analyticsCert.pem;
     ssl_certificate_key /home/erawn65/analyticsKey.pem;
-    ssl_client_certificate /home/erawn65/clientCert.pem;
-    ssl_verify_client on;
 
     location / {
-        proxy_pass http://localhost:8443;
+        proxy_pass https://localhost:5000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';

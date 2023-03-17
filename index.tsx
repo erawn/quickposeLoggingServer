@@ -19,6 +19,7 @@ var corsOptions = {
     /\.ericrawn\.graphics$/,
     /\*/,
   ],
+  method: ["GET", "POST", "OPTIONS"],
   optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 //quickpose-git-analytics-erawn.vercel.app/
@@ -33,7 +34,7 @@ var corsOptions = {
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 app.use(cors(corsOptions));
-const port = 8443;
+const port = 5001;
 const httpPort = process.env.PORT || 5000;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/

@@ -1,5 +1,5 @@
 #! /bin/bash
-sudo service nginx restart
+sudo systemctl start nginx
 
 sudo /etc/init.d/redis_6379 start
 

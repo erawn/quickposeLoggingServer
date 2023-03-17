@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { createClient } from "redis";
 
 const client = createClient();
-
+client.connect();
 const app: Express = express();
 app.use(helmet());
 app.use(express.json());
@@ -29,7 +29,7 @@ var corsOptions = {
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
 app.use(cors());
-const port = 443;
+const port = 2083;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
 //https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
 
@@ -65,9 +65,9 @@ app.post("/analytics", async (req: RequestWithClient, res: Response) => {
   //   return res.status(200);
   // }
 });
-app.listen(80, async function () {
+app.listen(8080, async function () {
   console.log("Example app listening on port 80");
-  await client.connect();
+  //await client.connect();
 });
 https
   .createServer(
@@ -78,6 +78,6 @@ https
     app
   )
   .listen(port, async () => {
-    await client.connect();
+    //await client.connect();
     console.log("server is runing at port", port);
   });

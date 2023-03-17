@@ -1,3 +1,4 @@
+#! /bin/bash
 sudo service nginx restart
 
 sudo /etc/init.d/redis_6379 start

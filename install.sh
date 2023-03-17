@@ -36,6 +36,9 @@ sudo apt-get update
 
 yes | sudo apt-get install redis
 
+sudo cp /bin/redis-server /usr/local/bin/redis-server
+sudo cp /bin/redis-cli /usr/local/bin/redis-cli
+
 sudo mkdir /etc/redis
 sudo mkdir /var/redis
 sudo mkdir /var/redis/6379
@@ -43,13 +46,11 @@ sudo mkdir /var/redis/6379
 sudo cp ./redis/redis_init_script /etc/init.d/redis_6379
 
 sudo cp ./redis/redis.conf /etc/redis/6379.conf
+sudo cp ./redis/redis.conf /etc/redis/redis.conf
 
 sudo update-rc.d redis_6379 defaults
 
 sudo chmod +x /etc/init.d/redis_6379
-
-sudo cp /bin/redis-server /usr/local/bin/redis-server
-sudo cp /bin/redis-cli /usr/local/bin/redis-cli
 
 sudo /etc/init.d/redis_6379 start
 

@@ -16,15 +16,11 @@ nvm use 16.13.0
 
 npm install --global yarn
 
-yarn
-
 sudo apt install lsb-release
 
 sudo apt-get install -y nginx
 
 sudo cp default /etc/nginx/sites-available/default
-
-sudo service nginx restart
 
 sudo apt-get install iptables
 
@@ -52,13 +48,8 @@ sudo update-rc.d redis_6379 defaults
 
 sudo chmod +x /etc/init.d/redis_6379
 
-sudo /etc/init.d/redis_6379 start
-
 yarn global add pm2
 
-yarn build
-
-yarn server
 
 
 

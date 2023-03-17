@@ -3,8 +3,6 @@ sudo systemctl start nginx
 
 sudo /etc/init.d/redis_6379 start
 
-yarn build
-
 pm2 kill
 
-yarn server
+cd /home/erawn65/quickposeLoggingServer && yarn && yarn build && yarn server

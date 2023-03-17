@@ -2,7 +2,7 @@ server {
     listen 80;
     listen 443 ssl;
     
-    server_name 35.225.91.146;
+    server_name analytics.ericrawn.media;
     
     ssl_certificate     /home/erawn65/analyticsCert.pem;
     ssl_certificate_key /home/erawn65/analyticsKey.pem;

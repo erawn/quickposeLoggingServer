@@ -69,15 +69,15 @@ app.listen(8080, async function () {
   console.log("Example app listening on port 80");
   //await client.connect();
 });
-// https
-//   .createServer(
-//     {
-//       cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
-//       key: fs.readFileSync("/home/erawn65/analyticsKey.pem"),
-//     },
-//     app
-//   )
-//   .listen(port, async () => {
-//     //await client.connect();
-//     console.log("server is runing at port", port);
-//   });
+https
+  .createServer(
+    {
+      cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
+      key: fs.readFileSync("/home/erawn65/analyticsKey.pem"),
+    },
+    app
+  )
+  .listen(port, async () => {
+    //await client.connect();
+    console.log("server is runing at port", port);
+  });

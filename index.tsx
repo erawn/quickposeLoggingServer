@@ -56,7 +56,7 @@ app.post("/analytics", (req: RequestWithClient, res: Response) => {
     console.log(JSON.stringify(data));
   }
 
-  return res.status(204);
+  return res.status(204).send();
   // if (!req.client.authorized) {
 
   //   return res.status(401).send("Invalid client certificate authentication.");

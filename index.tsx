@@ -46,7 +46,7 @@ app.get("/", (req: RequestWithClient, res: Response) => {
   }
 });
 
-app.post("/analytics", async (req: RequestWithClient, res: Response) => {
+app.post("/analytics", (req: RequestWithClient, res: Response) => {
   //console.log(req.client.authorized);
 
   const data = req.body;
@@ -55,7 +55,7 @@ app.post("/analytics", async (req: RequestWithClient, res: Response) => {
     console.log(JSON.stringify(data));
   }
 
-  return res.status(200);
+  return res.status(204);
   // if (!req.client.authorized) {
 
   //   return res.status(401).send("Invalid client certificate authentication.");

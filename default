@@ -6,7 +6,9 @@ server {
     
     ssl_certificate     /home/erawn65/analyticsCert.pem;
     ssl_certificate_key /home/erawn65/analyticsKey.pem;
-    
+    ssl_client_certificate /home/erawn65/clientCert.pem;
+    ssl_verify_client on;
+
     location / {
         proxy_pass http://localhost:5000;
         proxy_http_version 1.1;

@@ -27,7 +27,7 @@ var corsOptions = {
 //   method: ["POST"],
 //   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 // };
-app.use(cors());
+app.use(cors(corsOptions));
 const port = 2083;
 const httpPort = process.env.PORT || 5000;
 //https://medium.com/@sevcsik/authentication-using-https-client-certificates-3c9d270e8326
@@ -48,7 +48,7 @@ app.get("/", (req: RequestWithClient, res: Response) => {
 });
 
 app.post("/analytics", (req: RequestWithClient, res: Response) => {
-  //console.log(req.client.authorized);
+  console.log(req.client.authorized);
 
   const data = req.body;
   if (data.projectID != "") {
@@ -56,7 +56,7 @@ app.post("/analytics", (req: RequestWithClient, res: Response) => {
     console.log(JSON.stringify(data));
   }
 
-  return res.status(204).send();
+  return res.end(data.projectID);
   // if (!req.client.authorized) {
 
   //   return res.status(401).send("Invalid client certificate authentication.");

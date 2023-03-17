@@ -4,7 +4,6 @@ import https from "https";
 import fs from "fs";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { v4 as uuidv4 } from "uuid";
 import { createClient } from "redis";
 
 const client = createClient();

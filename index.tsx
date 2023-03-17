@@ -13,10 +13,15 @@ app.use(helmet());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var corsOptions = {
-  origin: "*",
+  origin: [
+    /\.vercel\.app$/,
+    /\.ericrawn\.media$/,
+    /\.ericrawn\.graphics$/,
+    /\*/,
+  ],
   optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-
+//quickpose-git-analytics-erawn.vercel.app/
 // var corsOptions = {
 //   origin: [
 //     /\.vercel\.app$/,
@@ -36,7 +41,15 @@ const httpPort = process.env.PORT || 5000;
 interface RequestWithClient extends Request {
   client?: any;
 }
-
+app.options("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, Content-Length, X-Requested-With"
+  );
+  res.send(200);
+});
 app.get("/", (req: RequestWithClient, res: Response) => {
   //console.log(req.client.authorized);
   if (!req.client.authorized) {

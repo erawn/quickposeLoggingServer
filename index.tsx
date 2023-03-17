@@ -52,6 +52,7 @@ app.post("/analytics", async (req: RequestWithClient, res: Response) => {
   const data = req.body;
   if (data.projectID != "") {
     client.set(new Date().getTime().toString(), JSON.stringify(data));
+    console.log(JSON.stringify(data));
   }
 
   return res.status(200);

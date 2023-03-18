@@ -20,6 +20,8 @@ sudo apt install lsb-release
 
 sudo apt-get install -y nginx
 
+sudo sudo systemctl stop nginx
+
 sudo cp default /etc/nginx/sites-available/default
 
 sudo apt-get install iptables

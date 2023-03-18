@@ -57,7 +57,7 @@ app.get("/", (req: RequestWithClient, res: Response) => {
     return res.send("Hello, world! UNAUTHORIZED");
     return res.status(401).send("Invalid client certificate authentication.");
   } else {
-    return res.send("Hello, world! AUTHORIZED");
+    return res.send("Hello, world!" + req.headers.SSL_Client_Verify);
   }
 });
 
@@ -94,15 +94,15 @@ app
       process.kill(process.pid, "SIGINT");
     });
   });
-https
-  .createServer(
-    {
-      cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
-      key: fs.readFileSync("/home/erawn65/analyticsKey.pem"),
-    },
-    app
-  )
-  .listen(port, async () => {
-    //await client.connect();
-    console.log("server is runing at port", port);
-  });
+// https
+//   .createServer(
+//     {
+//       cert: fs.readFileSync("/home/erawn65/analyticsCert.pem"),
+//       key: fs.readFileSync("/home/erawn65/analyticsKey.pem"),
+//     },
+//     app
+//   )
+//   .listen(port, async () => {
+//     //await client.connect();
+//     console.log("server is runing at port", port);
+//   });

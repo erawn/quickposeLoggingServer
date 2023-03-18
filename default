@@ -1,11 +1,7 @@
 server {
     listen 80;
-    listen 443 ssl;
     
     server_name analytics.ericrawn.media;
-    
-    ssl_certificate     /home/erawn65/analyticsCert.pem;
-    ssl_certificate_key /home/erawn65/analyticsKey.pem;
 
     location / {
         proxy_pass http://localhost:5000;
@@ -15,4 +11,33 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
        }
+    }
+
+server {
+    listen 443 ssl;
+    
+    server_name analytics.ericrawn.media;
+    
+    ssl_certificate     /home/erawn65/analyticsCert.pem;
+    ssl_certificate_key /home/erawn65/analyticsKey.pem;
+    ssl_protocols           TLSv1.2 TLSv1.3;
+    ssl_ciphers             HIGH:!aNULL:!MD5;
+    ssl_client_certificate  /home/erawn65/ca.crt;
+    ssl_verify_client       optional;
+    ssl_verify_depth        2;
+
+    location / {
+        if ($ssl_client_verify != SUCCESS) { return 403; }
+
+        proxy_set_header     SSL_Client_Issuer $ssl_client_i_dn;
+        proxy_set_header     SSL_Client $ssl_client_s_dn;
+        proxy_set_header     SSL_Client_Verify $ssl_client_verify;
+
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
     }

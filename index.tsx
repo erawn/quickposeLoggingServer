@@ -42,6 +42,7 @@ const httpPort = process.env.PORT || 5000;
 interface RequestWithClient extends Request {
   client?: any;
 }
+const DATA_KEY = fs.readFileSync("/home/erawn65/dataKey.txt");
 app.options("/*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -62,12 +63,13 @@ app.get("/", (req: RequestWithClient, res: Response) => {
 });
 
 app.post("/analytics", (req: RequestWithClient, res: Response) => {
-  console.log(req.client.authorized);
-
   const data = req.body;
-  if (data.projectID != "") {
+
+  if (data.projectID != "" && data.dataKey == DATA_KEY) {
     client.set(new Date().getTime().toString(), JSON.stringify(data));
     console.log(JSON.stringify(data));
+  } else {
+    console.log("data key mismatch!", data.dataKey, "COMPARED TO", DATA_KEY);
   }
 
   return res.end(data.projectID);

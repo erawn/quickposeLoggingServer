@@ -37,7 +37,7 @@ const httpPort = process.env.PORT || 5000;
 interface RequestWithClient extends Request {
   client?: any;
 }
-const DATA_KEY = fs.readFileSync("/home/erawn65/dataKey.txt");
+const DATA_KEY = fs.readFileSync("/home/erawn65/dataKey.txt",'utf8');
 app.options("/*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -45,7 +45,7 @@ app.options("/*", function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Content-Type, Authorization, Content-Length, X-Requested-With"
   );
-  res.send(200);
+  res.sendStatus(204);
 });
 app.get("/", (req: RequestWithClient, res: Response) => {
   //console.log(req.client.authorized);
@@ -60,7 +60,7 @@ app.get("/", (req: RequestWithClient, res: Response) => {
 app.post("/analytics", (req: RequestWithClient, res: Response) => {
   const data = req.body;
 
-  if (data.projectID != "" && data.dataKey == DATA_KEY) {
+  if (data.projectID != "" && data.dataKey.trim() === DATA_KEY.trim()) {
     client.set(new Date().getTime().toString(), JSON.stringify(data));
     console.log(JSON.stringify(data));
   } else {
